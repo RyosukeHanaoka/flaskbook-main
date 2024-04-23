@@ -1,43 +1,51 @@
+#Flaskフレームワークとテンプレートをレンダリングするための関数をインポートする。
 from flask import Flask, render_template
+#Flaskアプリでユーザーのログインを管理するためのLoginManagerをインポートする。
 from flask_login import LoginManager
+#Flask-Migrateをインポートし、データベースのマイグレーションを可能にする
 from flask_migrate import Migrate
+#SQLAlchemyというORM（オブジェクトリレーショナルマッピング）をインポートする
 from flask_sqlalchemy import SQLAlchemy
+#Flask-WTFのCSRF保護機能をインポートする
 from flask_wtf.csrf import CSRFProtect
-
+#アプリケーションの設定を読み込むためのconfigをインポートする
 from apps.config import config
-
+#SQLAlchemyのインスタンスを作成する
 db = SQLAlchemy()
+#CSRF保護のためのインスタンスを作成する
 csrf = CSRFProtect()
-# LoginManagerをインスタンス化する
+# ログイン管理のためのインスタンスを作成
 login_manager = LoginManager()
-# login_view属性に未ログイン時にリダイレクトするエンドポイントを指定する
+# ログインしていないユーザーをリダイレクトするエンドポイントを設定
 login_manager.login_view = "auth.signup"
 # login_message属性にログイン後に表示するメッセージを指定する
 # ここでは何も表示しないよう空を指定する
 login_manager.login_message = ""
 
 
-# create_app関数を作成する
+# アプリケーションを作成する関数"create_app"を作成する
 def create_app(config_key):
     # Flaskインスタンス生成
     app = Flask(__name__)
+    #指定された設定キーに基づいて構成を読み込む
     app.config.from_object(config[config_key])
 
-    # SQLAlchemyとアプリを連携する
+    # SQLAlchemyとアプリを連携するために初期化する
     db.init_app(app)
     # Migrateとアプリを連携する
     Migrate(app, db)
+    # CSRF保護をアプリに適用する
     csrf.init_app(app)
     # login_managerをアプリケーションと連携する
     login_manager.init_app(app)
 
-    # crudパッケージからviewsをimportする
+    # crudパッケージからCRUD操作のためのviewsをimportする
     from apps.crud import views as crud_views
 
-    # register_blueprintを使いviewsのcrudをアプリへ登録する
+    # register_blueprintを使い、CRUDのビューをアプリに登録
     app.register_blueprint(crud_views.crud, url_prefix="/crud")
 
-    # これから作成するauthパッケージからviewsをimportする
+    # これから作成するauthパッケージから認証のviewsをimportする
     from apps.auth import views as auth_views
 
     # register_blueprintを使いviewsのauthをアプリへ登録する
@@ -65,3 +73,7 @@ def page_not_found(e):
 def internal_server_error(e):
     """500 Internal Server Error"""
     return render_template("500.html"), 500
+
+
+
+
