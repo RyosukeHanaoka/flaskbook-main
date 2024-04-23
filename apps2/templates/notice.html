@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+            <title>My Page</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='CRUD/style1.css') }}">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="header">
+<h2>同意書</h2>
+<p>以下の内容をよく読み、同意する場合は「同意する」ボタンを押してください。</p>
+<div class="inline_box">
+この研究は研究の趣旨をじゅうぶんに理解していただいた上でご自身の自由意志によって同意を得られる20歳以上の男女を対象としています。<br>
+メールアドレスを登録することで、研究に参加することになります。<br>
+登録したメールアドレスは症例の重複を防止する目的にのみ使用されます。<br>
+年齢、性別、関節痛の発症時期、関節痛と関節腫脹の部位、朝のこわばりの持続時間、痛みの程度を記録します。<br>
+また、両手の甲の写真を撮影、保存していただき、その特徴を検出します。<br>
+医療者が使用する場合、さらに赤血球沈降速度、血清リウマチ因子、抗CCP抗体、C反応性タンパク質の結果を記録します。<br>
+手指単純X線写真が撮影されている場合、その写真を保存し、特徴を検出します。<br>
+これらの情報は、研究目的のために使用されますが、その際には細心の注意を払って匿名化します。<br>
+外部に個人情報が漏洩することはありません。<br>
+</div>
+<p>同意される方は、以下のボタンを押してください。</p>
+<form action="index.php" method="post">
+            <input type="submit" value="同意する">
+</body>
+</html>

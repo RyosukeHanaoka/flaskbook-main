@@ -1,0 +1,75 @@
+body {
+        position:  absolute;        /* 要素の配置方法を指定 */
+        padding:  20px;             /* 余白指定 */
+        left:  50px;                /* 左からの位置指定 */
+        top: 50px;                  /* 上からの位置指定 */
+
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
+}
+
+.form-group {
+    margin-bottom: 60px; /* 各セクション間の間隔を広げる */
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.2em;
+    height: 30px;
+    margin-top: 20px;
+    margin-left:20px;
+    margin-bottom: 10px;
+}
+
+.form-group input[type="radio"] + label {
+    margin-right: 20px;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+.input, 
+.form-group input[type="number"], 
+.form-group input[type="date"], 
+.form-group input[type="range"] {
+    width: 40%;
+    height: 40px;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px; /* 入力フィールドの下のマージンを調整 */
+    margin-right: 70px; /* 入力フィールドの右のマージンを調整 */
+    margin-left:30px
+    border 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* セレクトボックスのスタイルをカスタマイズ */
+.form-group select {
+    width: 40%; /* セレクトボックスの幅を広げる */
+    height: 40px; /* セレクトボックスの高さを指定 */
+    padding: 5px 10px; /* 内側の余白を調整 */
+    margin: 20px; /* セレクトボックスのマージンを調整 */
+    font-size: 16px; /* テキストサイズを大きくする */
+    border: 1px solid #ccc; /* 境界線のスタイル */
+    border-radius: 4px; /* 境界線の角を丸くする */
+    box-sizing: border-box; /* ボックスサイズの計算方法 */
+}
+
+.form-navigation button {
+    background-color: #4CAF50;
+    color: white;
+    height: 40px;
+    width: 200px;
+    padding: 10px 20px;
+    margin: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.form-navigation button:hover {
+    background-color: #45a049;
+}
+
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='CRUD/style_form.css') }}">
+<title>検査所見</title>
+</head>
+<body>
+<h2>血液検査の結果をうかがいます。</h2>
+<h3>以下の項目の項目の検査結果が判明している場合に入力してください。</h3>
+<form action="/submit-your-form-endpoint" method="post">
+<!--  -->
+    <div class="form-section">
+        <div class="form-group">
+            <label for="age">血清CRP値 (mg/dl)</label>
+            <input type="number" id="crp" name="crp" min="0.01" step="0.01" reqired> mg/dl
+        </div>
+    </div>
+    <div class="form-section">
+        <div class="form-group">
+            <label for="esr">赤血球沈降速度 (mm)</label>
+            <input type="number" id="esr" name="esr" min="1" step="1" reqired>mm
+        </div>
+    </div>
+    <div class="form-section">
+        <div class="form-group  ">
+            <label for="rf">リウマトイド因子 (IU/ml)</label>
+            <input type="number" id="rf" name="rf" min="1" step="1" reqired>IU/ml
+
+    <div>
+        <div class="form-group">
+            <label for="ccp">抗環状シトルリン化ペプチド抗体 (U/ml)</label>
+            <input type="number" id="anti-ccp" name="anti-ccp" min="0.01" step="0.01" reqired>U/ml
+        </div>
+        <label for="ccp">抗環状シトルリン化ペプチド抗体 (U/ml):</label>
+        <input type="number" id="ccp" name="ccp" step="0.01" required>U/ml
+    </div>
+    <div class="form-navigation">
+        <button type="button">前へもどる</button>
+        <button type="submit">次へすすむ</button>
+    </div>
+</form>
+</body>
+</html>
+
+
+
+
+
+dficjwoeij
+sdvhjwoiwoefvhufehiweuie
