@@ -1,11 +1,17 @@
+# Pathクラスをインポートする
 from pathlib import Path
-
+#pathlibは、ファイルシステムパスを操作するためのモジュール.
+#Pathクラスは、ファイルシステムパスを表すためのクラスです.
+# プロジェクトのルートディレクトリのパスを取得する
+#basedirとは、プロジェクトのルートディレクトリのパスを表す変数です.
+#Path(__file__).parent.parentは、このファイルの親ディレクトリの親ディレクトリのパスを表します.
 basedir = Path(__file__).parent.parent
-
 
 # BaseConfigクラスを作成する
 class BaseConfig:
+    # データベースの設定
     SECRET_KEY = "2AZSMss3p5QPbcY2hBsJ"
+    # データベースの設定
     WTF_CSRF_SECRET_KEY = "AuwzyszU5sugKN7KZs6f"
     # 画像アップロード先にapps/imagesを指定する
     UPLOAD_FOLDER = str(Path(basedir, "apps", "images"))
@@ -107,15 +113,21 @@ class BaseConfig:
 
 # BaseConfigクラスを継承してLocalConfigクラスを作成する
 class LocalConfig(BaseConfig):
+    # データベースの設定
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'local.sqlite'}"
+    # データベースの変更を追跡しない
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # テストモードを有効にする
     SQLALCHEMY_ECHO = True
 
 
 # BaseConfigクラスを継承してTestingConfigクラスを作成する
 class TestingConfig(BaseConfig):
+    # テストモードを有効にする
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'testing.sqlite'}"
+    # データベースの変更を追跡しない
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # CSRFトークンを無効にする
     WTF_CSRF_ENABLED = False
     # 画像アップロード先にtests/detector/imagesを指定する
     UPLOAD_FOLDER = str(Path(basedir, "tests", "detector", "images"))
@@ -123,6 +135,11 @@ class TestingConfig(BaseConfig):
 
 # config辞書にマッピングする
 config = {
+    # テストモード
     "testing": TestingConfig,
+    # ローカルモード
     "local": LocalConfig,
 }
+
+
+

@@ -1,6 +1,14 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm#FlaskFormとは、Flask-WTFのFormクラス。Formクラスとは、フォームを作成するためのクラス
+#flask_wtfとは、Flaskの拡張機能で、Flaskアプリケーションでフォームを作成するための機能を提供する
 from wtforms import PasswordField, StringField, SubmitField
+#wtformsとは、Flask-WTFのFormクラスを継承してフォームを作成するためのクラス
+#PasswordFieldとは、パスワード入力欄を作成するためのクラス
+#StringFieldとは、文字列入力欄を作成するためのクラス
+#SubmitFieldとは、ボタンを作成するためのクラス
 from wtforms.validators import DataRequired, Email, length
+#DataRequiredとは、入力必須をチェックするためのバリデータ
+#Emailとは、メールアドレスの形式をチェックするためのバリデータ
+#lengthとは、文字数をチェックするためのバリデータ
 
 
 # ユーザー新規作成とユーザー編集フォームクラス
@@ -26,5 +34,5 @@ class UserForm(FlaskForm):
     # ユーザーフォームpassword属性のラベルとバリデータを設定する
     password = PasswordField("パスワード", validators=[DataRequired(message="パスワードは必須です。")])
 
-    # ユーザーフォームsubmitの文言を設定する
+    # SubmitFieldとは、ボタンを作成するためのクラス
     submit = SubmitField("新規登録")
