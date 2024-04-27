@@ -1,37 +1,40 @@
-from flask import Flask, render_template, request, redirect, send_from_directory, url_for, flash
+from flask import Flask, Blueprint, render_template, request, redirect, send_from_directory, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from apps import models
-from apps import forms
+from crud_data import models
+from apps.crud import forms
 from .models import User, Symptom
 from .extensions import db
 import datetime
 import os
 from werkzeug.utils import secure_filename
 
+# 患者情報入力機能をBlueprint"dtfillin"として定義
+data = Blueprint('data', __name__, template_folder='templates', static_folder='static')
+
 # flaskのインスタンスを作成
-app = Flask(__name__)
+data = Flask(__name__)
 #設定ファイルの読み込み
-app.config.from_pyfile('settings.py')
+data.config.from_pyfile('settings.py')
 #SQLAlchemyのインスタンスを作成
-db = SQLAlchemy(app)
+db = SQLAlchemy(data)
 #Migrateオブジェクトを作成し、FlaskオブジェクトとSQLAlchemyオブジェクトを登録
-migrate = Migrate(app, db)
+migrate = Migrate(data, db)
 
 # ルーティングの設定（トップページ）
-@app.route('/index', methods=['GET', 'POST'])
+@data.route('/index', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
 # ルーティングの設定（同意文書）
-@app.route('/notice', methods=['GET', 'POST'])
+@data.route('/notice', methods=['GET', 'POST'])
 def notice():
     return render_template('notice.html')
 
 # ルーティングの設定（年齢、性別、発症時期、自覚症状など）
-@app.route('/symptom', methods=['GET', 'POST'])
+@data.route('/symptom', methods=['GET', 'POST'])
 def symptom():
     if request.method == 'POST':
         user = Symptom(
@@ -65,7 +68,7 @@ def symptom():
     return render_template('symptom.html', years=years, months=months, days=days, stiffness_durations=stiffness_durations)
 
 # ルーティングの設定（症状のある関節の特定）
-@app.route('/joints_fig', methods=['GET', 'POST'])
+@data.route('/joints_fig', methods=['GET', 'POST'])
 def joints_fig():
     if request.method == 'POST':
         # フォームからチェックされた関節を抽出
@@ -85,7 +88,7 @@ def joints_fig():
         return render_template('joints_fig.html')
 
 # ルーティングの設定（臨床検査結果）
-@app.route('/labo_exam', methods=['GET', 'POST'])
+@data.route('/labo_exam', methods=['GET', 'POST'])
 def labo_exam():
     if request.method == 'POST':
         # フォームから数値を取得
@@ -94,12 +97,21 @@ def labo_exam():
         crp = request.form.get('crp', type=float)
         esr = request.form.get('esr', type=float)
     else:#GETリウエストの場合
-        return render_template('labo_exam.html')   
+        return render_template('labo_exam.html')  
+
+# ルーティングの設定（画像アップロード）
+@data.route('/handpicture', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # ファイルがない場合の処理
+        if 'file' not in request.files:
+            flash('画像ファイルがありません')
+            return redirect(request) 
     
 UPLOAD_FOLDER = '/path/to/upload/folder'  # Replace '/path/to/upload/folder' with the actual path to your upload folder
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'heic', 'heif', 'gif'])
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+data.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -107,7 +119,7 @@ def allowed_file(filename):
 
 #このスクリプトが直接実行された場合にのみアプリケーションが起動するようにする    
 if __name__ == '__main__':
-    app.run(debug=True)
+    data.run(debug=True)
 
 
 

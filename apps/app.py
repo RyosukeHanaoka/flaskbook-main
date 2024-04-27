@@ -58,10 +58,10 @@ def create_app(config_key):
     app.register_blueprint(dt_views.dt)
 
     # これから作成するmy_appsパッケージからviewsをimportする
-    from apps.my_apps import myviews as my_views
-    
-    # register_blueprintを使いviewsのmy_appをアプリへ登録する
-    app.register_blueprint(my_views.my_app)
+    from apps.crud_data import views as my_views
+
+    # register_blueprintを使いviewsのdataをアプリへ登録する
+    app.register_blueprint(my_views.data)
 
     # カスタムエラー画面を登録する
     app.register_error_handler(404, page_not_found)
