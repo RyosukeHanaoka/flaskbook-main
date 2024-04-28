@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="style3.css">Back</a>
+    <link rel="stylesheet" href="static/style3.css">Back</a>
     <title>Tutorial</title>
 </head>
 
 <body>
-<h1>手の甲の写真を撮影します。</h1>
-<h2>撮影方法</h2>
-<p>ご使用のスマートフォンのカメラを起動し、あなたの手の甲をご自分で撮影してください。<br>
-図のように、手の甲をカメラに向けて撮影してください。</p><br>
-<h2>撮影のポイント</h2>
-<p>フラッシュを使用しないで、自然光で撮影してください。<br>
-逆光にならないように撮影してください。<br>
-できるだけ手の甲を大きく、正面に捉えて撮影してください。</p><br>
-<h2>撮影例</h2>
-<img src="images/hand.pdf" alt="手の甲の写真撮影方法">
-<h2>注意事項</h2>
-<p>撮影した写真は、手の甲の状態を確認するために使用します。<br>
-撮影した写真は、個人情報保護法に基づき、厳重に管理いたします。<br>
-撮影した写真を、第三者に提供することはありません。</p><br>
-<h2>写真撮影とアップロード</h2>
-</form>
-<p>これから写真を撮影する場合、以下のボタンをクリックして、写真撮影を開始してください。</p>
-<form action="/cgi-bin/camera.cgi" method="post">
-<p>右手の写真：</p><input type="submit" value="写真撮影を開始する">
-</form>
-<form action="/cgi-bin/camera.cgi" method="post">
-<p>左手の写真：</p><input type="submit" value="写真撮影を開始する">
-</form>
-<p>すでに撮影した写真がある場合、以下のボタンをクリックして、撮影した写真をアップロードしてください。</p>
-<form action="/cgi-bin/upload.cgi" method="post" enctype="multipart/form-data">
-<p>右手の写真：<input type="file" name="right_hand" accept="image/jpeg, image/jpg, image/JPG, image/heic, image/HEIC, image/heif, image/HEIF, image/png, image/PNG">
-</p>
-<input type="submit" value="送信">
-</form>
-<form action="/cgi-bin/upload.cgi" method="post" enctype="multipart/form-data">
-<p>左手の写真：<input type="file" name="left_hand" accept="image/jpeg, image/jpg, image/JPG, image/heic, image/HEIC, image/heif, image/HEIF, image/png, image/PNG">
-</p>
-<input type="submit" value="送信">
+    <h1>手の甲の写真を撮影します。</h1>
+    <h2>撮影方法</h2>
+    <p>ご使用のスマートフォンのカメラを起動し、あなたの手の甲をご自分で撮影してください。<br>
+        図のように、手の甲をカメラに向けて撮影してください。</p><br>
+    <h2>撮影のポイント</h2>
+    <p>フラッシュを使用しないで、自然光で撮影してください。<br>
+        逆光にならないように撮影してください。<br>
+        できるだけ手の甲を大きく、正面に捉えて撮影してください。</p><br>
+    <h2>撮影例</h2>
+    <img src="static/images/hand.pdf" alt="手の甲の写真撮影方法">
+    <h2>注意事項</h2>
+    <p>撮影した写真は、手の甲の状態を確認するために使用します。<br>
+        撮影した写真は、個人情報保護法に基づき、厳重に管理いたします。<br>
+        撮影した写真を、第三者に提供することはありません。</p><br>
+    <h2>写真撮影とアップロード</h2>
+    </form>
+    <p>これから写真を撮影する場合、以下のボタンをクリックして、写真撮影を開始してください。</p>
+    <form action="/cgi-bin/camera.cgi" method="post">
+        <p>右手の写真：</p><input type="submit" value="写真撮影を開始する">
+    </form>
+    <form action="/cgi-bin/camera.cgi" method="post">
+        <p>左手の写真：</p><input type="submit" value="写真撮影を開始する">
+    </form>
+    <p>すでに撮影した写真がある場合、以下のボタンをクリックして、撮影した写真をアップロードしてください。</p>
+    <form action="/cgi-bin/upload.cgi" method="post" enctype="multipart/form-data">
+        <p>右手の写真：<input type="file" name="right_hand"
+                accept="image/jpeg, image/jpg, image/JPG, image/heic, image/HEIC, image/heif, image/HEIF, image/png, image/PNG">
+        </p>
+        <input type="submit" value="送信">
+    </form>
+    <form action="/cgi-bin/upload.cgi" method="post" enctype="multipart/form-data">
+        <p>左手の写真：<input type="file" name="left_hand"
+                accept="image/jpeg, image/jpg, image/JPG, image/heic, image/HEIC, image/heif, image/HEIF, image/png, image/PNG">
+        </p>
+        <input type="submit" value="送信">
 </body>
+
 </html>

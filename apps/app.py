@@ -12,7 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 #アプリケーションの設定を読み込むためのconfigをインポートする
 from pathlib import Path
-from apps.config import config
+from apps import config
 #SQLAlchemyのインスタンスを作成する
 db = SQLAlchemy()
 #CSRF保護のためのインスタンスを作成する
@@ -27,9 +27,10 @@ login_manager.login_message = ""
 
 
 # アプリケーションを作成する関数"create_app"を作成する
-def create_app(config_key):
+def create_app():
     # Flaskインスタンス生成
     app = Flask(__name__)
+    config_key=os.getenv('CONFIG_KEY', 'local')
     #指定された設定キーに基づいて構成を読み込む
     app.config.from_object(config[config_key])
     """app.config.from_mapping(

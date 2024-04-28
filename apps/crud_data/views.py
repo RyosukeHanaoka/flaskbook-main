@@ -12,29 +12,29 @@ import os
 from werkzeug.utils import secure_filename
 
 # 患者情報入力機能をBlueprint"dtfillin"として定義
-data = Blueprint('data', __name__, template_folder='templates', static_folder='static')
+#data = Blueprint('data', __name__, template_folder='templates', static_folder='static')
 
 # flaskのインスタンスを作成
-data = Flask(__name__)
+app = Flask(__name__)
 #設定ファイルの読み込み
-data.config.from_pyfile('settings.py')
+app.config.from_pyfile('settings.py')
 #SQLAlchemyのインスタンスを作成
-db = SQLAlchemy(data)
+db = SQLAlchemy(app)
 #Migrateオブジェクトを作成し、FlaskオブジェクトとSQLAlchemyオブジェクトを登録
-migrate = Migrate(data, db)
+migrate = Migrate(app, db)
 
 # ルーティングの設定（トップページ）
-@data.route('/index', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
 # ルーティングの設定（同意文書）
-@data.route('/notice', methods=['GET', 'POST'])
+@app.route('/notice', methods=['GET', 'POST'])
 def notice():
     return render_template('notice.html')
 
 # ルーティングの設定（年齢、性別、発症時期、自覚症状など）
-@data.route('/symptom', methods=['GET', 'POST'])
+@app.route('/symptom', methods=['GET', 'POST'])
 def symptom():
     if request.method == 'POST':
         user = Symptom(
@@ -68,7 +68,7 @@ def symptom():
     return render_template('symptom.html', years=years, months=months, days=days, stiffness_durations=stiffness_durations)
 
 # ルーティングの設定（症状のある関節の特定）
-@data.route('/joints_fig', methods=['GET', 'POST'])
+@app.route('/joints_fig', methods=['GET', 'POST'])
 def joints_fig():
     if request.method == 'POST':
         # フォームからチェックされた関節を抽出
@@ -88,7 +88,7 @@ def joints_fig():
         return render_template('joints_fig.html')
 
 # ルーティングの設定（臨床検査結果）
-@data.route('/labo_exam', methods=['GET', 'POST'])
+@app.route('/labo_exam', methods=['GET', 'POST'])
 def labo_exam():
     if request.method == 'POST':
         # フォームから数値を取得
@@ -100,7 +100,7 @@ def labo_exam():
         return render_template('labo_exam.html')  
 
 # ルーティングの設定（画像アップロード）
-@data.route('/handpicture', methods=['GET', 'POST'])
+@app.route('/handpicture', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         # ファイルがない場合の処理
@@ -111,7 +111,7 @@ def upload():
 UPLOAD_FOLDER = '/path/to/upload/folder'  # Replace '/path/to/upload/folder' with the actual path to your upload folder
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'heic', 'heif', 'gif'])
-data.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
