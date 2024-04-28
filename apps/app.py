@@ -1,3 +1,5 @@
+import sys
+print(sys.path)
 #Flaskフレームワークとテンプレートをレンダリングするための関数をインポートする。
 from flask import Flask, render_template
 #Flaskアプリでユーザーのログインを管理するためのLoginManagerをインポートする。
@@ -9,6 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 #Flask-WTFのCSRF保護機能をインポートする
 from flask_wtf.csrf import CSRFProtect
 #アプリケーションの設定を読み込むためのconfigをインポートする
+from pathlib import Path
 from apps.config import config
 #SQLAlchemyのインスタンスを作成する
 db = SQLAlchemy()
@@ -29,7 +32,14 @@ def create_app(config_key):
     app = Flask(__name__)
     #指定された設定キーに基づいて構成を読み込む
     app.config.from_object(config[config_key])
-
+    """app.config.from_mapping(
+        SECRET_KEY="2AZSMss3p5QPbcY2hBsJ",
+        SQLALCHEMY_DATABASE_URI=
+        f"sqlite:///{Path(__file__).parent.parent/'local.sqlite'}",
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        SQLALCHEMY_ECHO=True,
+        WTF_CSRF_SECRET_KEY="AuwzyszU5sugKN7KZs6f"
+    )   """
     # SQLAlchemyとアプリを連携するために初期化する
     db.init_app(app)
     # Migrateとアプリを連携する

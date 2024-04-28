@@ -1,6 +1,6 @@
 from apps.app import db
-from apps.crud.forms import UserForm
-from apps.crud.models import User
+from crud.forms import UserForm
+from crud.models import User
 from flask import Blueprint, redirect, render_template, url_for
 from flask_login import login_required
 
